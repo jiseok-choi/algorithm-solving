@@ -1,5 +1,11 @@
 package programmers;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class FunctionDevelopment {
     // 스택/큐
     /*
@@ -40,12 +46,76 @@ public class FunctionDevelopment {
 
      */
 
-    public int[] solution(int[] progresses, int[] speeds) {
-        int[] answer = {};
+    public static int[] solution(int[] progresses, int[] speeds) {
+        List<Integer> answer = new ArrayList<>();
+
+        Queue<Integer> queue = new LinkedList<>();
+
+        int length = progresses.length;
+        for (int i = 0; i < length; i ++) {
+            int progress = progresses[i];
+            int speed = speeds[i];
+
+            int stock = (100 - progress) / speed;
+            if ((100 - progress) % speed > 0) {
+                stock++;
+            }
+
+            queue.add(stock);
+        }
+
+        // 비교값 초기화
+        int stand = queue.peek();
+        int count = 0;
+        for (int i = 0; i < progresses.length; i++) {
+            int que = queue.poll();
+            if (stand < que) {
+                stand = que;
+                answer.add(count);
+                count = 1;
+            } else {
+                count++;
+            }
+        }
+
+        answer.add(count);
 
 
+        int[] result = new int[answer.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = answer.get(i).intValue();
+        }
 
-        return answer;
+        return result;
     }
 
+    static public void main(String[] args) {
+        int[] progress = {93, 30, 55};
+        int[] speeds = {1, 30, 5};
+        System.out.println(solution(progress, speeds));
+    }
 }
+
+
+/*
+다른사람 풀이
+
+import java.util.ArrayList;
+import java.util.Arrays;
+class Solution {
+    public int[] solution(int[] progresses, int[] speeds) {
+        int[] dayOfend = new int[100];
+        int day = -1;
+        for(int i=0; i<progresses.length; i++) {
+            while(progresses[i] + (day*speeds[i]) < 100) {
+                day++;
+            }
+            dayOfend[day]++;
+        }
+        return Arrays.stream(dayOfend).filter(i -> i!=0).toArray();
+    }
+}
+
+
+ */
+
