@@ -2,10 +2,7 @@ package programmers;
 
 import com.sun.org.apache.bcel.internal.generic.LLOAD;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.SortedMap;
+import java.util.*;
 import java.util.logging.SocketHandler;
 
 /**
@@ -41,23 +38,32 @@ import java.util.logging.SocketHandler;
  */
 
 public class HotMore {
-    public int hotMore(int[] scovile, int K) {
+    public int hotMore(int[] scoville, int K) {
         int answer = 0;
 
-        // sort
-        Arrays.sort(scovile);
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
 
-        int loop = 0;
-        for (int i = 0; i < scovile.length; i++) {
-            if (scovile[i] < K)
-                loop++;
+        for (int i = 0; i < scoville.length; i++) {
+            priorityQueue.add(scoville[i]);
         }
 
-        if (loop > 0) {
-            answer = filter(scovile, K);
-        } else {
-            return -1;
+        boolean flag = true;
+        while (priorityQueue.peek() <= K) {
+
+            if (priorityQueue.size() == 1) {
+                return -1;
+            }
+            int stock = priorityQueue.poll();
+            int stock2 = priorityQueue.poll();
+
+            int result = stock + (stock2 * 2);
+
+            priorityQueue.add(result);
+
+            answer++;
+
         }
+
 
         return answer;
     }
