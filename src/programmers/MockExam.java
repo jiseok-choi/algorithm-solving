@@ -2,7 +2,6 @@ package programmers;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.PriorityQueue;
 
 /**
  * 문제 설명
@@ -70,12 +69,10 @@ public class MockExam {
             }
         });
 
-
-
         if (arr[0][0] == arr[1][0] && arr[1][0] == arr[2][0]) {
             return new int[] {arr[2][1], arr[1][1], arr[0][1]};
         } else if (arr[0][0] == arr[1][0]) {
-            return new int[] {arr[0][1], arr[1][1]};
+            return new int[] {arr[1][1], arr[0][1]};
         } else {
             return new int[] {arr[0][1]};
         }
@@ -87,19 +84,19 @@ public class MockExam {
         int[] pattern2 = { 2,1,2,3,2,4,2,5 };
         int[] pattern3 = { 3,3,1,1,2,2,4,4,5,5 };
 
-//        System.out.println(Math.max(19, 19));
+        System.out.println(Math.max(19, 19));
 
-        int[] arr = solution(new int[] {1,2,3,4,5});
+        int[] arr = solution(new int[] {1,3,2,4,2});
 
         for(int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
         }
 
-//        for (int i = 0; i < 19; i++) {
-//            System.out.println(pattern1[i % pattern1.length]);
-//            System.out.println(i % pattern2.length);
-//            System.out.println(i % pattern3.length);
-//            System.out.println("=============");
-//        }
+        for (int i = 0; i < 19; i++) {
+            System.out.println(pattern1[i % pattern1.length]);
+            System.out.println(i % pattern2.length);
+            System.out.println(i % pattern3.length);
+            System.out.println("=============");
+        }
     }
 }
