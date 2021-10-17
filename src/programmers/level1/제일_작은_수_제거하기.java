@@ -38,9 +38,10 @@ public class 제일_작은_수_제거하기 {
         return nums;
 
         /**
-         * if (arr.length <= 1) return new int[]{ -1 };
-         *       int min = Arrays.stream(arr).min().getAsInt();
-         *       return Arrays.stream(arr).filter(i -> i != min).toArray();
+         * if (arr.length <= 1)
+         *     return new int[]{ -1 };
+         * int min = Arrays.stream(arr).min().getAsInt();
+         * return Arrays.stream(arr).filter(i -> i != min).toArray();
          */
     }
 }
